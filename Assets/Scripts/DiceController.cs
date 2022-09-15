@@ -3,32 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DiceController : MonoBehaviour
+public class DiceController : StateMachine
 {
-    [SerializeField] private List<Transform> faces;
-    [SerializeField] private TextMeshProUGUI resultText;
-    private bool checkTopFace;
+    [SerializeField] public List<Transform> faces;
+    [SerializeField] public TextMeshProUGUI resultText;
+    public Rigidbody diceRigidBody;
 
     private void Awake() 
     {
+        diceRigidBody = GetComponent<Rigidbody>();
+
         if (faces.Count != 6)
         {
             Debug.LogError("Dice faces references not found!");
-            checkTopFace = false;
-        }
-        else
-        {
-            checkTopFace = true;
         }
     }
 
-    private void Update() 
+    private void Start() 
     {
-        if (checkTopFace)
-        {
-            int topFaceIndex = faces.FindIndex( face => face.up == Vector3.up);
-            topFaceIndex++;
-            resultText.text = "" + topFaceIndex;
-        }
+        SetState(new SpawnState(this));
     }
 }
