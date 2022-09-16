@@ -209,7 +209,7 @@ MonoBehaviour:
   - {fileID: 6323750833562048469}
   - {fileID: 669562528098376684}
   - {fileID: 4342028334087898806}
-  resultText: {fileID: 0}
+  diceRigidBody: {fileID: 0}
 --- !u!1 &6069581641819522322
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,10 +316,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5512163894350622723}
     m_Modifications:
-    - target: {fileID: 5475221751725805582, guid: 3a83d1b770fe0e34ea0ec9f13369f5fd, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6059003587714193953, guid: 3a83d1b770fe0e34ea0ec9f13369f5fd, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -368,8 +364,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dice_d6_Plastic Glossy Pure red
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5475221751725805582, guid: 3a83d1b770fe0e34ea0ec9f13369f5fd, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a83d1b770fe0e34ea0ec9f13369f5fd, type: 3}
 --- !u!4 &1759434598554855141 stripped
 Transform:
