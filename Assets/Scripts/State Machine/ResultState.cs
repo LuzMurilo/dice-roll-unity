@@ -53,7 +53,7 @@ public class ResultState : State
     {        
         int topFaceIndex = Controller.faces.FindIndex( face => face.up == Vector3.up);
         topFaceIndex++;
-        Controller.resultText.text = "" + topFaceIndex;
         Debug.Log("Result is: " + topFaceIndex);
+        UIController.MainInstance.PrintDiceResult(topFaceIndex);
     }
 }

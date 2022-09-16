@@ -6,7 +6,6 @@ using TMPro;
 public class DiceController : StateMachine
 {
     [SerializeField] public List<Transform> faces;
-    [SerializeField] public TextMeshProUGUI resultText;
     public Rigidbody diceRigidBody;
 
     private void Awake() 
