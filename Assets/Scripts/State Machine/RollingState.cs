@@ -11,7 +11,6 @@ public class RollingState : State
 
     public override IEnumerator Start()
     {
-        Debug.Log("Rolling State");
         return base.Start();
     }
 

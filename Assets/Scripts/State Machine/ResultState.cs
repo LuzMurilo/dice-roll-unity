@@ -6,6 +6,7 @@ public class ResultState : State
 {
     float timeElapsed;
     bool resultFound;
+    bool invalidResult;
 
     public ResultState(DiceController cont) : base(cont)
     {
@@ -14,46 +15,40 @@ public class ResultState : State
 
     public override IEnumerator Start()
     {
-        Debug.Log("Result State");
         resultFound = false;
+        invalidResult = false;
         timeElapsed = 0.0f;
-
-        if (Controller.faces.Exists(face => face.up == Vector3.up))
-        {
-            CheckTopFace();
-            resultFound = true;
-        }
-        
 
         return base.Start();
     }
 
     public override IEnumerator Update()
     {
-        if (!resultFound)
+        if (!resultFound && !invalidResult)
         {
             timeElapsed += Time.deltaTime;
-            if (timeElapsed >= 1.0f)
-            {
-                if (Controller.faces.Exists(face => face.up == Vector3.up))
-                {
-                    CheckTopFace();
-                    resultFound = true;
-                }
-                else
-                {
-                    Debug.LogWarning("Invalid Roll!");
-                }
-            }
+            CheckTopFace();
         }
+
         return base.Update();
     }
 
     public void CheckTopFace()
     {        
-        int topFaceIndex = Controller.faces.FindIndex( face => face.up == Vector3.up);
-        topFaceIndex++;
-        Debug.Log("Result is: " + topFaceIndex);
-        UIController.MainInstance.PrintDiceResult(topFaceIndex);
+        int topFaceIndex = Controller.faces.FindIndex( face => (face.up - Vector3.up).magnitude <= 0.1f);
+
+        if (topFaceIndex != -1)
+        {
+            topFaceIndex++;
+            Debug.Log("Result is: " + topFaceIndex);
+            UIController.MainInstance.PrintDiceResult(topFaceIndex);
+            resultFound = true;
+        }
+        else if (timeElapsed >= 3.0f)
+        {
+            Debug.LogWarning("Invalid Roll!");
+            UIController.MainInstance.ShowWarningSign();
+            invalidResult = true;
+        }
     }
 }

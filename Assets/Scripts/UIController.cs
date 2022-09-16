@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
     public static UIController MainInstance;
     [SerializeField] TMP_Text diceNumber1;
     [SerializeField] TMP_Text diceNumber2;
+    [SerializeField] TMP_Text warnSign;
 
     private void Awake() 
     {
@@ -15,6 +16,11 @@ public class UIController : MonoBehaviour
         {
             UIController.MainInstance = this;
         }
+    }
+
+    private void Start() 
+    {
+        warnSign.gameObject.SetActive(false);
     }
 
     public void PrintDiceResult(int result)
@@ -33,5 +39,11 @@ public class UIController : MonoBehaviour
     {
         diceNumber1.text = "";
         diceNumber2.text = "";
+        warnSign.gameObject.SetActive(false);
+    }
+
+    public void ShowWarningSign()
+    {
+        warnSign.gameObject.SetActive(true);
     }
 }
